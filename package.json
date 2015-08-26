@@ -1,0 +1,12 @@
+{
+  "name": "game-of-life-v1",
+  "version": "1.0.0",
+  "description": "Basic Implementation of game of live",
+  "main": "gol.js",
+  "author": "Kalimar Maia",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5"
+  }
+}
