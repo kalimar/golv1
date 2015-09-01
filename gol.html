@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Game of Life</title>
+<meta charset="UTF-8">
+<script src="gol.js"></script>
+<script src="https://cdn.rawgit.com/jquery/jquery/2.1.4/dist/jquery.min.js"></script>
+<style>
+  #canvas {
+    position: absolute;
+    left: 40%;
+    top: 20%;
+  }
+</style>
+<script>
+function init() {
+  var size = 50
+  , starterCells = 100
+  , board = seedBoard(size, starterCells);
+  drawBoard(board);
+  window.setInterval(function() {
+    board = tick(board, size);
+    drawBoard(board);
+  }, 100);
+}
+</script>
+</head>
+<body onLoad="init();">
+<canvas id="canvas" width="600" height="400">
+Your browser does not support the canvas element .
+</canvas>
+</body>
+</html>
