@@ -8,14 +8,14 @@
 <style>
   #canvas {
     position: absolute;
-    left: 40%;
-    top: 20%;
+    left: 30%;
+    top: 10%;
   }
 </style>
 <script>
 function init() {
-  var size = 50
-  , starterCells = 100
+  var size = 60
+  , starterCells = 400
   , board = seedBoard(size, starterCells);
   drawBoard(board);
   window.setInterval(function() {
@@ -26,7 +26,7 @@ function init() {
 </script>
 </head>
 <body onLoad="init();">
-<canvas id="canvas" width="600" height="400">
+<canvas id="canvas" width="610" height="610">
 Your browser does not support the canvas element .
 </canvas>
 </body>

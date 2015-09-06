@@ -144,7 +144,7 @@ function generateCells(board, cellsToGenerate) {
 
 function drawBoard(board) {
   var ctx=document.getElementById('canvas').getContext('2d');
-  ctx.clearRect(0,0, 600, 400);
+  ctx.clearRect(0,0, 610, 610);
   board.map( function(cell) {
     ctx.fillStyle = 'orange';
     ctx.fillRect(cell[0]*10+5, cell[1]*10+5, 10, 10);
