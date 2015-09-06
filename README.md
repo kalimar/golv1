@@ -1,5 +1,6 @@
-Setup a basic JS node app
-=================================
+# Javascript Ramp up
+
+## Setup a basic JS node app
 
 * Create directory
 * `git init`
@@ -59,3 +60,15 @@ describe('Basic string Test', function() {
   })
 });
 ```
+## Deploying the App Locally
+### Dependencies
+* Node 0.12.7
+* NPM 2.11.3
+
+### View the App locally
+
+* Clone the repository.
+* Visit the repository directory.
+* `npm install`
+* open the page `gol.html` in your browser to see the game of life (v1).
+* open the page `test/test.html` to run tests in a browser.
