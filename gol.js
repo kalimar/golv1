@@ -71,14 +71,10 @@ function countLivingNeighbors(cell,board,size) {
                   , [ cell[0]+1 , cell[1]-1  ] ];
   var livingNeighbors = 0;
   var neighbor;
-  while (neighbors.length > 0) {
-    neighbor = neighbors.pop();
+  neighbors.map(function(neighbor) {
     neighbor = toroidizeCell(neighbor, size);
-
-    if (cellAlreadyOnBoard(neighbor, board)) {
-      livingNeighbors += 1;
-    };
-  }
+    if (cellAlreadyOnBoard(neighbor, board)) { livingNeighbors += 1 }
+  })
   return livingNeighbors;
 }
 
@@ -122,9 +118,7 @@ function tick(board, size) {
           }
       } else {
         //  reproduction
-        if (neighborCount === GROWTH_CONDITION) {
-          cellsToGenerate.push(cell)
-        }
+        if (neighborCount === GROWTH_CONDITION) { cellsToGenerate.push(cell) }
       }
     }
   }
@@ -142,11 +136,9 @@ function killCells(board, cellsToKill) {
 }
 
 function generateCells(board, cellsToGenerate) {
-  while (cellsToGenerate.length > 0) {
-    cell = cellsToGenerate.pop();
+  cellsToGenerate.map(function(cell) {
     board.push(cell);
-    generateCells(board, cellsToGenerate);
-  }
+  })
   return board;
 }
 
