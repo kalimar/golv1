@@ -13,7 +13,7 @@
 * `touch foo.js`
 
 ### App structure
-![tree structure](tree.png)
+![tree structure](public/images/tree.png)
 ### test.html
 ```html
 <html>
