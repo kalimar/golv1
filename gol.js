@@ -53,8 +53,13 @@ function getRandomInt(size) {
   return Math.floor(Math.random() * (size));
 }
 
-// Our board is a toroidal array https://en.wikipedia.org/wiki/Torus
-// Meaning that the left and right edges (and top and bottom) are stiched together
+/*
+ Our board is a toroidal array https://en.wikipedia.org/wiki/Torus
+ Meaning that the left and right edges (and top and bottom) are stiched together.
+ if a neighbor has any coordinate equal to -1 or greater than the last position,
+ then we have to torodoize the cell so it will move to the other edge of
+ the board.
+*/
 function countLivingNeighbors(cell,board,size) {
   var neighbors = [ [ cell[0]-1 , cell[1]    ]
                   , [ cell[0]+1 , cell[1]    ]
@@ -68,11 +73,34 @@ function countLivingNeighbors(cell,board,size) {
   var neighbor;
   while (neighbors.length > 0) {
     neighbor = neighbors.pop();
+    neighbor = toroidizeCell(neighbor, size);
+
     if (cellAlreadyOnBoard(neighbor, board)) {
       livingNeighbors += 1;
     };
   }
   return livingNeighbors;
+}
+
+function toroidize(position, size) {
+  var endPos = size - 1; //last position in array is one less than size
+  var firstPos = 0;
+
+  if (position === -1) {
+    position =  endPos;
+    return position;
+  } else if (position === size) {
+    position = firstPos;
+    return position;
+  }
+  return position
+}
+
+function toroidizeCell (cell, size) {
+  cell.forEach(function(position, index, newCell) {
+    newCell[index] = toroidize(position, size)
+  })
+  return cell;
 }
 
 function tick(board, size) {

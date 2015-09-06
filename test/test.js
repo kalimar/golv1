@@ -22,6 +22,26 @@ describe('Building a board', function() {
     assert.isTrue(cellContainer(cell3), 'Cell 3 fits within the board');
   });
 
+  it('will toroidize the cell if necessary', function() {
+    var size = 10
+    , lastPos = size -1
+    , firstPos = 0
+    , nonToroid = [3,4]
+    , toroid1 = [-1, 1]//toroidized [lastPos, 1]
+    , toroid2 = [10, 1]//toroidized [firstPos, 1]
+    , toroid3 = [1, -1]//toroidized [1, lastPos]
+    , toroid4 = [1, 10]//toroidized [1, firstPos]
+    , toroid5 = [-1, -1]//toroidized [lastPos, lastPos]
+    , toroid6 = [10, 10]//toroidized [firstPos, firstPos];
+    assert.isTrue(cellsMatch(nonToroid, toroidizeCell(nonToroid, size)), 'do not toroidize if not necessary' );
+    assert.isTrue(cellsMatch([lastPos, 1], toroidizeCell(toroid1, size)), 'toroidize toroid1');
+    assert.isTrue(cellsMatch([firstPos, 1], toroidizeCell(toroid2, size)), 'toroidize toroid2');
+    assert.isTrue(cellsMatch([1, lastPos], toroidizeCell(toroid3, size)), 'toroidize toroid3');
+    assert.isTrue(cellsMatch([1, firstPos], toroidizeCell(toroid4, size)), 'toroidize toroid4');
+    assert.isTrue(cellsMatch([lastPos, lastPos], toroidizeCell(toroid5, size)), 'toroidize toroid5');
+    assert.isTrue(cellsMatch([firstPos, firstPos], toroidizeCell(toroid6, size)), 'toroidize toroid6');
+  })
+
   it('can check if a cell already exists on the board', function() {
     var size = 20
     , board  = []
