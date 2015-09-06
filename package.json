@@ -5,8 +5,13 @@
   "main": "gol.js",
   "author": "Kalimar Maia",
   "license": "ISC",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "chai": "^3.2.0",
+    "ejs": "^2.3.3",
+    "express": "^4.13.3",
     "mocha": "^2.2.5"
   }
 }
