@@ -31,22 +31,13 @@ function generateRandomCell(size, board) {
 }
 
 function cellAlreadyOnBoard(cell, board) {
-  var cell = cell //allows us to use cell in lexical scope
   return board.filter(
     function(boardCell) {
-     return cellsMatch(cell, boardCell) } ).length > 0 ? true : false;
+     return cellsMatch(cell, boardCell) } ).length > 0;
 }
 
 function cellsMatch(cellA, cellB) {
-  if (!cellA || !cellB) {
-    return false
-  } else {
-    if (cellA[0] === cellB[0] && cellA[1] === cellB[1]) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  return (cellA[0] === cellB[0] && cellA[1] === cellB[1]);
 }
 
 function getRandomInt(size) {
@@ -70,7 +61,6 @@ function countLivingNeighbors(cell,board,size) {
                   , [ cell[0]-1 , cell[1]+1  ]
                   , [ cell[0]+1 , cell[1]-1  ] ];
   var livingNeighbors = 0;
-  var neighbor;
   neighbors.map(function(neighbor) {
     neighbor = toroidizeCell(neighbor, size);
     if (cellAlreadyOnBoard(neighbor, board)) { livingNeighbors += 1 }
@@ -78,30 +68,21 @@ function countLivingNeighbors(cell,board,size) {
   return livingNeighbors;
 }
 
-function toroidize(position, size) {
-  var endPos = size - 1; //last position in array is one less than size
-  var firstPos = 0;
-
-  if (position === -1) {
-    position =  endPos;
-    return position;
-  } else if (position === size) {
-    position = firstPos;
-    return position;
-  }
-  return position
-}
-
+/*
+  Checks if the cell is off the grid (0 or too large) and shifts it to
+  the other end of the board. Using modulo, we check if the cell position
+  is -1 if so we return the last index. At the top end of the array, using
+  modulo, the result will return either the position, or 0.
+*/
 function toroidizeCell (cell, size) {
-  cell.forEach(function(position, index, newCell) {
-    newCell[index] = toroidize(position, size)
-  })
+  cell[0] = cell[0]%size < 0 ? size - 1 : cell[0]%size;
+  cell[1] = cell[1]%size < 0 ? size - 1 : cell[1]%size;
   return cell;
 }
 
 function tick(board, size) {
   var cellsToGenerate = []
-  , cellsToKill       = []
+  , cellsToKill       = [];
   for (var i = 0; i < size; i++) {
     for (var j=0; j < size; j++) {
       var cell = [i,j]
@@ -128,7 +109,7 @@ function tick(board, size) {
 }
 
 function killCells(board, cellsToKill) {
-  newBoard = board.filter(
+  var newBoard = board.filter(
     function(targetCell) {
       return !cellAlreadyOnBoard(targetCell, cellsToKill);
   });
