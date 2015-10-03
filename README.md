@@ -72,3 +72,8 @@ describe('Basic string Test', function() {
 * `npm install`
 * open the page `gol.html` in your browser to see the game of life (v1).
 * open the page `test/test.html` to run tests in a browser.
+
+## Todo
+* Create an infinite Board
+* Use a functional programming approach
+* User react-flux to allow user interaction
